@@ -1,0 +1,22 @@
+@charset "utf-8";
+
+@font-face
+{
+	font-family: 'My Fonts';
+	src: url('./fonts/AdobeHeitiStd-Regular.otf');
+}
+
+@font-face
+{
+	font-family: 'My Fonts';
+	unicode-range: U+00-024F;
+	src: url('../fonts/Helvetica-LT-55-Roman.ttf');
+}
+
+body{
+	font-family: My Fonts;
+}
+
+#scoreboard{
+  font-size: 36px;
+}

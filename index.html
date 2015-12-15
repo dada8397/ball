@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Ball Game</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="index.css" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+  </head>
+  <body>
+    <div id="content" class="raw">
+      <div id="game-area" class="col-sm-9">
+        <div id="ball"><img src="./img/ball.png"/></div>
+        <div id="bar"><img src="./img/bar.png"/></div>
+      </div>
+      <div id="scoreboard" class="col-sm-3">
+        <div id="playbtn">
+          <img style="cursor: pointer; float:right" src="./img/play.png" height="60px" width="60px" onclick="startGame();" alt="開始遊戲"/>
+        </div>
+        <div id="time">時間：0分0秒</div>
+        <div id="score">分數：0分</div>
+      </div>
+    </div>
+  </body>
+</html>
