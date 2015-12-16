@@ -242,6 +242,7 @@ function gameOver() {
     clearInterval(timer_id);
     document.getElementById("ball-speed").disabled = false;
     document.getElementById("bomb-speed").disabled = false;
+    $('#highscore').html("最高分數：" + score + "分");
 }
 
 function updateTime() {
