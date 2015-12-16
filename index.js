@@ -9,12 +9,12 @@ var ymax = ymin + $('#game-area').height();
 
 //ball status
 var vx = 1, vy = 1; // velocity
-var x = xmin, y = ymin;  // position
+var x = 20, y = 20;  // position
 var xdir = 1, ydir = 1; // direction
 var ball_length = 30;
 
 //bar status
-var bar_width = 200;
+var bar_width = $('#bar').width();
 var bary = ymax - $('#bar').height();
 var barx_left = 500, barx_right = barx_left + bar_width;
 var barv = 35;
@@ -59,6 +59,13 @@ function showMessage(title, message) {
 }
 
 function startGame() {
+  xmin = 0;
+  xmax = xmin + $('#game-area').width();
+  ymin = 0;
+  ymax = ymin + $('#game-area').height();
+  bar_width = $('#bar').width();
+  bary = ymax - $('#bar').height();
+  barx_left = (xmin + xmax - bar_width) / 2, barx_right = barx_left + bar_width;
     if(!start) {
         if(gameover == 1) {
             reset();
@@ -86,10 +93,10 @@ function refresh() {
         generateBombs();
         bombs_timer = 0;
     }
-    $('#ball').position.top = y;
-    $('#ball').position.left = x;
+    $('#ball').css("top", y);
+    $('#ball').css("left", x);
 
-    document.getElementById("bar").style.left = barx_left;
+    $('#bar').css("left", barx_left);
     moveBallX();
     moveBallY();
     moveBullets();
@@ -160,7 +167,7 @@ function moveBarLeft() {
 }
 
 function moveBarRight() {
-    if(barx_left + barv <= xmax - bar_width) {
+    if(barx_right + barv <= xmax) {
         barx_left += barv;
         barx_right = barx_left + bar_width;
     } else {
@@ -174,10 +181,10 @@ function generateBombs() {
     bombs.push(div);
     document.getElementById("game-area").appendChild(div);
     div.style.position = "absolute";
-    div.style.left = Math.random() * (xmax - bar_width - 50) + bar_width/2;
+    div.style.left = (Math.random() * (xmax - bar_width - 50) + bar_width/2) + "px";
     div.style.top = 0;
-    div.style.width = 50;
-    div.style.height = 50;
+    div.style.width = "50px";
+    div.style.height = "50px";
     div.innerHTML = "<img src=\"./img/bomb.png\" height=\"50px\" width=\"50px\"/>";
 }
 
@@ -190,7 +197,7 @@ function moveBombs() {
             bombs.splice(i, 1);
             i--;
         } else {
-            bombs[i].style.top = parseInt(bombs[i].style.top) + 1.5;
+            bombs[i].style.top = (parseInt(bombs[i].style.top) + 1.5) + "px";
         }
         if(parseInt(bombs[i].style.top) + 50 >= bary &&
             parseInt(bombs[i].style.left) >= barx_left - 50/2 &&
@@ -207,10 +214,10 @@ function generateBullets() {
     bullets.push(div);
     document.getElementById("game-area").appendChild(div);
     div.style.position = "absolute";
-    div.style.left = barx_left + bar_width/2 - 40/2;
-    div.style.top = bary - 50;
-    div.style.width = 20;
-    div.style.height = 50;
+    div.style.left = (barx_left + bar_width/2 - 40/2) + "px";
+    div.style.top = (bary - 50) + "px";
+    div.style.width = "20px";
+    div.style.height = "50px";
     div.innerHTML = "<img src=\"./img/bullet.png\" height=\"50px\" width=\"20px\"/>";
 }
 
@@ -223,7 +230,7 @@ function moveBullets() {
             bullets.splice(i, 1);
             i--;
         } else {
-            bullets[i].style.top = parseInt(bullets[i].style.top) - 3;
+            bullets[i].style.top = (parseInt(bullets[i].style.top) - 3) + "px";
         }
     }
 }
@@ -274,8 +281,8 @@ function checkBump() {
 }
 
 function reset() {
-    document.getElementById("ball").style.top = 0;
-    document.getElementById("ball").style.left = 0;
+    $('#ball').css("top", 20);
+    $('#ball').css("left", 20);
     for(var i = 0; i < bombs.length; i++)
         bombs[i].parentNode.removeChild(bombs[i]);
     for(var i = 0; i < bullets.length; i++)
@@ -283,8 +290,8 @@ function reset() {
     bombs.length = 0;
     bullets.length = 0;
     score = 0;
-    x = 0;
-    y = 0;
+    x = 20;
+    y = 20;
 }
 
 document.addEventListener("DOMContentLoaded", function(event) {

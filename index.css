@@ -28,9 +28,14 @@ body{
 	position: absolute;
 }
 
+#bomb{
+	position: absolute;
+}
+
 #ball{
 	top: 10px;
 	left: 10px;
+	position: absolute;
 	display: none;
 }
 
