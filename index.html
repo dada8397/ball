@@ -4,34 +4,38 @@
     <title>Ball Game</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-dialog.min.css" rel="stylesheet">
     <link href="index.css" rel="stylesheet">
     <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery-2.1.4.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-dialog.min.js"></script>
     <script type="text/javascript" src="index.js"></script>
   </head>
   <body>
-    <div id="content" class="raw">
-      <div id="game-area" class="col-sm-8">
+    <div id="content">
+      <div id="game-area">
         <div id="ball"><img src="./img/ball.png" height="30px" width="30px"/></div>
-        <div id="bar"><img src="./img/bar.png" height="30px" width="200px"/></div>
+        <div id="bar"><img id="barimg" src="./img/bar.png"/></div>
       </div>
-      <div id="scoreboard" class="col-sm-4">
+      <div id="scoreboard">
         <div id="playbtn">
           <img style="cursor: pointer; float:right;" src="./img/play.png" height="60px" width="60px" onclick="startGame();" alt="開始遊戲"/>
         </div>
+        <br><br>
         <div id="time">時間：0分0秒</div>
         <div id="score">分數：0分</div>
         <div id="speedrate">
           球體速率
-          <select id="ball-speed" style="font-size:24px;">
+          <select id="ball-speed" style="font-size:16px;">
             <option value="3">快</option>
             <option value="2">中</option>
             <option value="1">慢</option>
           </select>
           <br>
           炸彈產生速率
-          <select id="bomb-speed" style="font-size:24px;">
+          <select id="bomb-speed" style="font-size:16px;">
             <option value="3">快</option>
             <option value="2">中</option>
             <option value="1">慢</option>

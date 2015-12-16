@@ -21,23 +21,37 @@ body{
   border-color: black;
   border-width: 2px;
   border-style: solid;
-  height: 600px;
+  height: 90%;
+	width: 70%;
   left: 10px;
   top: 10px;
-  float: left;
+	position: absolute;
+}
+
+#ball{
+	display: none;
+}
+
+#scoreboard{
+	left: 75%;
+	width: 24%;
+	position: absolute;
 }
 
 #bar{
-  height: 30px;
-  width: 200px;
-  top: 560px;
+	height: 5%;
+  width: 20%;
+  top: 95%;
+	left: 5%;
   position: absolute;
+}
+
+#barimg{
+	box-sizing: content-box;
+	height: 100%;
+	width: 100%;
 }
 
 #scoreboard{
   font-size: 36px;
-}
-
-#speedrate{
-  font-size: 24px;
 }
