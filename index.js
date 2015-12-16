@@ -63,6 +63,7 @@ function startGame() {
   xmax = xmin + $('#game-area').width();
   ymin = 0;
   ymax = ymin + $('#game-area').height();
+x = xmin + Math.random() * xmax;
   bar_width = $('#bar').width();
   bary = ymax - $('#bar').height();
   barx_left = (xmin + xmax - bar_width) / 2, barx_right = barx_left + bar_width;
@@ -107,6 +108,8 @@ function refresh() {
 }
 
 function checkKey(e) {
+    if(!start)
+      return;
     e = e || window.event;
     if (e.keyCode == '38') {
         // up arrow
@@ -291,7 +294,7 @@ function reset() {
     bombs.length = 0;
     bullets.length = 0;
     score = 0;
-    x = 20;
+    x = xmin + Math.random() * xmax;
     y = 20;
 }
 
