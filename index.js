@@ -1,16 +1,24 @@
+//key
 document.onkeydown = checkKey;
 
-var xmin = $('#game-area').left;
-var xmax = $('#game-area').offsetWidth;
+//game-area
+var xmin = 10;
+var xmax = xmin + $('#game-area').width();
+var ymin = 10;
+var ymax = ymin + $('#game-area').height();
 
-
+//ball status
 var vx = 1, vy = 1; // velocity
-var x  = 0, y = 0;  // position
-var ball_length = 30;
+var x = xmin, y = ymin;  // position
 var xdir = 1, ydir = 1; // direction
+var ball_length = 30;
+
+//bar status
 var bar_width = 200;
-var ybar = 690, xbar_left = 500, xbar_right = xbar_left+bar_width;
-var vbar = 35;
+var bary = ymax - $('#bar').height();
+var barx_left = 500, barx_right = barx_left + bar_width;
+var barv = 35;
+
 var start = false;
 var timer_id;
 var start_time;
@@ -78,10 +86,10 @@ function refresh() {
         generateBombs();
         bombs_timer = 0;
     }
-    document.getElementById("ball").style.top = y;
-    document.getElementById("ball").style.left = x;
+    $('#ball').position.top = y;
+    $('#ball').position.left = x;
 
-    document.getElementById("bar").style.left = xbar_left;
+    document.getElementById("bar").style.left = barx_left;
     moveBallX();
     moveBallY();
     moveBullets();
@@ -123,9 +131,9 @@ function moveBallX() {
 }
 
 function moveBallY() {
-    if(y + vy * ydir > ybar-ball_length && x <= xbar_right-ball_length/2 && x >= xbar_left-ball_length/2 && ydir == 1) {
+    if((y + vy * ydir > bary - ball_length) && (x <= barx_right - ball_length/2) && (x >= barx_left-ball_length/2) && ydir == 1) {
         ydir *= -1;
-        y = ybar - ball_length;
+        y = bary - ball_length;
     } else {
         if(y + vy * ydir >= ymin && y + vy * ydir <= ymax - ball_length)
             y += vy * ydir;
@@ -142,22 +150,22 @@ function moveBallY() {
 }
 
 function moveBarLeft() {
-    if(xbar_left - vbar >= xmin) {
-        xbar_left -= vbar;
-        xbar_right = xbar_left + bar_width;
+    if(barx_left - barv >= xmin) {
+        barx_left -= barv;
+        barx_right = barx_left + bar_width;
     } else {
-        xbar_left = xmin;
-        xbar_right = xbar_left + bar_width;
+        barx_left = xmin;
+        barx_right = barx_left + bar_width;
     }
 }
 
 function moveBarRight() {
-    if(xbar_left + vbar <= xmax - bar_width) {
-        xbar_left += vbar;
-        xbar_right = xbar_left + bar_width;
+    if(barx_left + barv <= xmax - bar_width) {
+        barx_left += barv;
+        barx_right = barx_left + bar_width;
     } else {
-        xbar_left = xmax - bar_width;
-        xbar_right = xbar_left + bar_width;
+        barx_left = xmax - bar_width;
+        barx_right = barx_left + bar_width;
     }
 }
 
@@ -184,9 +192,9 @@ function moveBombs() {
         } else {
             bombs[i].style.top = parseInt(bombs[i].style.top) + 1.5;
         }
-        if(parseInt(bombs[i].style.top) + 50 >= ybar &&
-            parseInt(bombs[i].style.left) >= xbar_left - 50/2 &&
-            parseInt(bombs[i].style.left) <= xbar_right - 50/2) {
+        if(parseInt(bombs[i].style.top) + 50 >= bary &&
+            parseInt(bombs[i].style.left) >= barx_left - 50/2 &&
+            parseInt(bombs[i].style.left) <= barx_right - 50/2) {
             gameOver();
             document.getElementById('bomb-sound').play();
             bombs[i].innerHTML = "<img src=\"./img/bomb1.png\" height=\"50px\" width=\"50px\"/>";
@@ -199,8 +207,8 @@ function generateBullets() {
     bullets.push(div);
     document.getElementById("game-area").appendChild(div);
     div.style.position = "absolute";
-    div.style.left = xbar_left + bar_width/2 - 40/2;
-    div.style.top = ybar - 50;
+    div.style.left = barx_left + bar_width/2 - 40/2;
+    div.style.top = bary - 50;
     div.style.width = 20;
     div.style.height = 50;
     div.innerHTML = "<img src=\"./img/bullet.png\" height=\"50px\" width=\"20px\"/>";
