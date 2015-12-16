@@ -9,7 +9,7 @@ var ymax = ymin + $('#game-area').height();
 
 //ball status
 var vx = 1, vy = 1; // velocity
-var x = 20, y = 20;  // position
+var x, y;  // position
 var xdir = 1, ydir = 1; // direction
 var ball_length = 30;
 
@@ -63,7 +63,8 @@ function startGame() {
   xmax = xmin + $('#game-area').width();
   ymin = 0;
   ymax = ymin + $('#game-area').height();
-x = xmin + Math.random() * xmax;
+  x = xmin + Math.random() * xmax;
+  y = 20;
   bar_width = $('#bar').width();
   bary = ymax - $('#bar').height();
   barx_left = (xmin + xmax - bar_width) / 2, barx_right = barx_left + bar_width;
@@ -72,6 +73,8 @@ x = xmin + Math.random() * xmax;
             reset();
             gameover = 0;
         }
+        $('#ball').css("top", y);
+        $('#ball').css("left", x);
         document.getElementById("ball").style.display = "block";
 
         var ballSpeed = document.getElementById("ball-speed");
@@ -285,8 +288,10 @@ function checkBump() {
 }
 
 function reset() {
-    $('#ball').css("top", 20);
-    $('#ball').css("left", 20);
+    x = xmin + Math.random() * xmax;
+    y = 20;
+    $('#ball').css("top", y);
+    $('#ball').css("left", x);
     for(var i = 0; i < bombs.length; i++)
         bombs[i].parentNode.removeChild(bombs[i]);
     for(var i = 0; i < bullets.length; i++)
@@ -294,8 +299,7 @@ function reset() {
     bombs.length = 0;
     bullets.length = 0;
     score = 0;
-    x = xmin + Math.random() * xmax;
-    y = 20;
+
 }
 
 document.addEventListener("DOMContentLoaded", function(event) {
